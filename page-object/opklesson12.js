@@ -1,5 +1,61 @@
+
+var homeloancommands = {
+    moveOn: function(){
+        this.waitForElementPresent('@nextButton')
+            this.click('@nextButton')
+            return this    
+    },
+    pickfieldSelectors: function(data){
+        this.click(data.loanselector)
+        this.click(data.propertyselector)
+        this.click('@nextButton')
+        this.setValue('@citylocationSelector', data.cityinput)
+        this.click('@nextButton')
+        this.click(data.propertyloanType)
+            return this
+    },
+    runtestTemplate: function(){
+        this.click('@foundnewhomeButton')
+        this.click('@workingwithrealestateButton')
+        this.waitForElementPresent('@nextButton')
+        this.click('@nextButton')
+        this.waitForElementPresent('@excellentcreditButton')
+        this.click('@excellentcreditButton')
+        this.waitForElementPresent('@nobankruptcyButton')
+        this.click('@nobankruptcyButton')
+        this.waitForElementPresent('@nextButton')
+        this.click('@nextButton')
+        this.waitForElementPresent('@nextButton')
+        this.click('@nextButton')
+        this.pause(1000)
+        this.waitForElementPresent('@typeofloanOvrvw')
+        this.waitForElementPresent('@propertytypeOvrvw')    
+        this.waitForElementPresent('@citylocationOvrvw')
+        this.waitForElementPresent('@typeofpropertyloanOvrvw')
+        return this
+    },
+    rerunTest: function(){
+        this.click('@startagainbuttonOvrvw')
+        return this
+    },
+    testloop: function(optionChosen) {
+        this.moveOn()
+        this.pickfieldSelectors(optionChosen)
+        this.runtestTemplate()
+        this.rerunTest()
+        return this
+    }
+
+}
+
+
+
+
+
+
 module.exports = {
     url: "http://localhost:3000/#/",
+    commands : [ homeloancommands ],
     elements: {
         //List of Selectors In Seqeuntial Order
         nextButton: 'button[name="nextButton"]',
@@ -18,7 +74,7 @@ module.exports = {
         page3nextButton: '.wTwo-btn',
         //Page 4 Selectors
         primaryhomeButton: 'button[value="Primary Home"]',
-        rentalpropertyButton: 'button[value="Rental Property]',
+        rentalpropertyButton: 'button[value="Rental Property"]',
         secondaryhomeButton: 'button[value="Secondary Home"]',
         //Page 5 Selectors
         foundnewhomeButton: 'button[name="yesButton"]',
@@ -49,10 +105,10 @@ module.exports = {
         emailinputField: '#email',
         //Page 12 Overview Selectors:
         nameresultOvrvw: 'p[class="name p2"]',
-        typeofloanOvrvw: 'p[class="loanType p2"',
+        typeofloanOvrvw: 'p[class="loanType p2"]',
         propertytypeOvrvw: 'p[class="propertyType p2"]',
         citylocationOvrvw: 'p[class="city p2"]',
-        typeofpropertyloanOvrvw: 'p[class="propertyPurpose p2]',
+        typeofpropertyloanOvrvw: 'p[class="propertyPurpose p2"]',
         foundnewhomeOvrvw: 'p[class="found p2"]',
         workingwithagentOvrvw: 'p[class="agent p2"]',
         estimatedpurchasepriceOvrvw: 'p[class="price p2]',
